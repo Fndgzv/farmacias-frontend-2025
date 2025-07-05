@@ -1,0 +1,36 @@
+<header class="header">
+
+  <!-- 🔹 IZQUIERDA -->
+  <div class="header-left">
+    <button class="toggle-sidebar-button" (click)="toggleSidebar.emit()">
+      <mat-icon>{{ isSidebarOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+    <img src="assets/images/farmBienIcon.png" alt="Logo" class="header-logo" />
+    <span class="site-title">Farmacias del Bienestar para Todos</span>
+    <span *ngIf="farmaciaNombre" class="site-sucursal">{{farmaciaNombre}}</span>
+  </div>
+
+  <div class="header-center">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="¿Qué estás buscando?" class="search-input" />
+    <button *ngIf="searchQuery" (click)="clearSearch()" class="clear-button">✖</button>
+    <button class="search-button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+
+  <!-- 🔹 DERECHA: Sesión -->
+  <div class="header-right">
+    <ng-container *ngIf="!authService.isLoggedIn; else loggedInTemplate">
+      <button class="login-logout-button" (click)="authService.showLogin()">Iniciar sesión</button>
+    </ng-container>
+
+    <ng-template #loggedInTemplate>
+      <div class="user-info-container">
+        <span class="user-info" *ngIf="userNombre">
+          Bienvenido, {{ userNombre }} ({{ userRol }})
+        </span>
+        <button class="login-logout-button" (click)="authService.logout()">Cerrar sesión</button>
+      </div>
+    </ng-template>
+  </div>
+</header>
