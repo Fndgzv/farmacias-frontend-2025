@@ -366,7 +366,8 @@ button {
     size: 276pt auto;
   }
 
-  html, body {
+  html,
+  body {
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -375,13 +376,18 @@ button {
     visibility: hidden !important;
   }
 
+  .logo-ticket {
+    display: block !important;
+  }
+
   .ticket-impresion,
   .ticket-impresion * {
     visibility: visible !important;
   }
 
   .ticket-impresion {
-    width: 259pt !important; /* 276pt - (2 * 8.5pt) */
+    width: 259pt !important;
+    /* 276pt - (2 * 8.5pt) */
     margin-left: 8.5pt !important;
     margin-right: 8.5pt !important;
     padding: 0 !important;
@@ -394,7 +400,7 @@ button {
   }
 }
 
- .productos {
+.productos {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
