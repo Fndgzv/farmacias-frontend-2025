@@ -20,17 +20,28 @@
 
   <!-- 🔹 DERECHA: Sesión -->
   <div class="header-right">
+    <!-- Botón Inicio -->
+    <button *ngIf="mostrarInicio"  mat-icon-button 
+      matTooltip="Ir al inicio" (click)="router.navigate(['/home'])" class="icon-button">
+      <mat-icon>home</mat-icon>
+    </button>
+
     <ng-container *ngIf="!authService.isLoggedIn; else loggedInTemplate">
-      <button class="login-logout-button" (click)="authService.showLogin()">Iniciar sesión</button>
+      <button mat-icon-button matTooltip="Iniciar sesión" (click)="authService.showLogin()" class="icon-button">
+        <mat-icon>login</mat-icon>
+      </button>
     </ng-container>
 
     <ng-template #loggedInTemplate>
-      <div class="user-info-container">
+      <div class="user-info-container" style="display: flex; align-items: center; gap: 10px;">
         <span class="user-info" *ngIf="userNombre">
           Bienvenido, {{ userNombre }} ({{ userRol }})
         </span>
-        <button class="login-logout-button" (click)="authService.logout()">Cerrar sesión</button>
+        <button mat-icon-button matTooltip="Cerrar sesión" (click)="authService.logout()" class="icon-button">
+          <mat-icon>logout</mat-icon>
+        </button>
       </div>
     </ng-template>
+
   </div>
 </header>

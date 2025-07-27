@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '../environments/guards/auth.guard';
+
 import { HomeComponent } from './pages/home/home.component'
 import { LoginComponent } from './pages/login/login.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
-import { MainLayoutComponent } from './layouts/main-layout.component';
-import { authGuard } from '../environments/guards/auth.guard';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { DevolucionesComponent } from './pages/devoluciones/devoluciones.component';
 import { InicioTurnoComponent } from './pages/inicio-turno/inicio-turno.component';
 import { SurtirFarmaciaComponent } from './pages/surtir-farmacia/surtir-farmacia.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { AjustesInventarioComponent } from './pages/ajustes-inventario/ajustes-inventario.component';
+import { MainLayoutComponent } from './layouts/main-layout.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +94,13 @@ export const routes: Routes = [
         path: 'proveedores',
         loadComponent: () =>
           import('./admin/proveedores/proveedores.component').then(m => m.ProveedoresComponent),
+        data: { rolesPermitidos: ['admin'] },
+        canActivate: [authGuard]
+      },
+      {
+        path: 'cortes-de-caja',
+        loadComponent: () =>
+          import('./admin/cortes-de-caja/cortes-de-caja.component').then(m => m.CortesDeCajaComponent),
         data: { rolesPermitidos: ['admin'] },
         canActivate: [authGuard]
       },

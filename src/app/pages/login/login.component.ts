@@ -83,7 +83,7 @@ export class LoginComponent {
             } else {
 
               this.farmaciaId = response.user.farmacia._id;
-              
+
               this.verificarCorteActivoYRedirigir();
             }
 
@@ -128,7 +128,7 @@ export class LoginComponent {
 
   verificarCorteActivoYRedirigir(): void {
     const usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
-    const token = localStorage.getItem('auth_token');  
+    const token = localStorage.getItem('auth_token');
 
     if (!usuario || !usuario.id || !usuario.rol) {
       console.error('Usuario no válido en localStorage');
@@ -154,7 +154,7 @@ export class LoginComponent {
             <p><strong>Inicio:</strong> ${fecha}</p>
             <p><strong>Efectivo inicial:</strong> ${monto}</p>
           `, icon: 'info',
-            timer: 2500,
+            timer: 2000,
             showConfirmButton: false,
             allowOutsideClick: false,
             allowEscapeKey: false,
@@ -163,8 +163,29 @@ export class LoginComponent {
             this.router.navigate(['/home']);
           });
         } else {
-          this.authService.hideLogin();
-          this.router.navigate(['/inicio-turno']);
+          //verificar si puede abrir nuevo turno
+          this.http.get<{ puedeAbrirTurno: boolean }>(
+            `${environment.apiUrl}/cortes/verificar-turno/${this.farmaciaId}`, { headers }
+          ).subscribe({
+            next: (resp) => {
+              if (resp.puedeAbrirTurno) {
+                this.authService.hideLogin();
+                this.router.navigate(['/inicio-turno']);
+              } else {
+                Swal.fire(
+                  'Acceso denegado',
+                  'Ya cerraste tu turno de hoy. No puedes iniciar otro sin autorización.',
+                  'warning'
+                ).then(() => {
+                  this.authService.logout();
+                });
+              }
+            },
+            error: err => {
+              console.error('Error al verificar si puede abrir turno:', err);
+              this.authService.logout();
+            }
+          });
         }
       },
       error: (err) => {

@@ -15,6 +15,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import Swal from 'sweetalert2';
+import { VentaService } from '../../services/venta.service';
 
 
 @Component({
@@ -98,6 +99,9 @@ export class VentasComponent implements OnInit {
   mostrarTicket: boolean = false;
   folioVentaGenerado: string | null = null;
 
+  venta: any = null;
+  ventaEnProceso: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private ventasService: VentasService,
@@ -105,6 +109,7 @@ export class VentasComponent implements OnInit {
     private clienteService: ClienteService,
     private ticketService: TicketService,
     private library: FaIconLibrary,
+    private ventaService: VentaService,
   ) {
     this.ventaForm = this.fb.group({
       cliente: [''],
@@ -129,12 +134,23 @@ export class VentasComponent implements OnInit {
     const storeUs = localStorage.getItem('user_nombre');
     this.nombreUs = storeUs ? storeUs : '';
 
-    console.log('Nombre usuario: ', this.nombreUs);
+    this.ventasPausadas = this.ventaService.getVentasPausadas();
+  }
 
-    console.log('Datos farmacia: ', farmacia);
+  ngOnDestroy(): void {
 
+    if ( this.carrito.length > 0 ) {
+      this.pausarVenta();
+    }
+
+    if (this.ventasPausadas.length > 0) {
+      this.ventaService.setVentasPausadas(this.ventasPausadas);
+    } else {
+      this.ventaService.limpiarVentasPausadas();
+    }
 
   }
+
 
   nombreDiaSemana(dia: number): string {
     const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -1002,11 +1018,12 @@ export class VentasComponent implements OnInit {
         transferencia: this.montoTransferencia,
         vale: this.montoVale
       },
+      AsiQuedaMonedero: this.montoMonederoCliente - this.montoVale + this.totalAlmonedero,
       fecha: new Date().toISOString(),
       usuario: this.nombreUs
     };
 
-    this.mostrarTicket = true; 
+    this.mostrarTicket = true;
 
     setTimeout(() => {
       window.print();

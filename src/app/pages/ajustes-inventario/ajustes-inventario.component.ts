@@ -27,11 +27,13 @@ export class AjustesInventarioComponent implements OnInit {
     codigoBarras: string;
     categoria: string;
     descuentoINAPAM: boolean | null;
+    generico: boolean | null;
   } = {
       nombre: '',
       codigoBarras: '',
       categoria: '',
-      descuentoINAPAM: null
+      descuentoINAPAM: null,
+      generico: null
     };
   paginaActual = 1;
   tamanioPagina = 15;
@@ -87,7 +89,7 @@ export class AjustesInventarioComponent implements OnInit {
       next: (productos) => {
         this.productos = productos;
         if (borrarFiltros) {
-          this.filtros = { nombre: '', codigoBarras: '', categoria: '', descuentoINAPAM: null };
+          this.filtros = { nombre: '', codigoBarras: '', categoria: '', descuentoINAPAM: null, generico: null };
         }
         this.aplicarFiltros();
       },
@@ -104,14 +106,20 @@ export class AjustesInventarioComponent implements OnInit {
         ? true
         : p.descuentoINAPAM === this.filtros.descuentoINAPAM;
 
-      return coincideNombre && coincideCodigo && coincideCategoria && coincideINAPAM;
+      const coincideGenerico = this.filtros.generico === null
+        ? true
+        : p.generico === this.filtros.generico;
+
+      return coincideNombre && coincideCodigo && coincideCategoria && coincideINAPAM && coincideGenerico;
     });
     this.paginaActual = 1;
   }
 
   limpiarFiltro(campo: keyof typeof this.filtros) {
     if (campo === 'descuentoINAPAM') this.filtros[campo] = null;
-    else this.filtros[campo] = '';
+    if (campo === 'generico') this.filtros[campo] = null;
+    if (campo === 'nombre' || campo === 'categoria' || campo === 'codigoBarras') this.filtros[campo] = '';
+    
     this.aplicarFiltros();
   }
 
@@ -192,7 +200,7 @@ export class AjustesInventarioComponent implements OnInit {
     this.formularioMasivo.reset();
 
     this.grabarCambios();
-    
+
     Swal.fire({ icon: 'success', title: 'Cambios aplicados', text: 'Base de datos actualizada correctamente.' });
   }
 

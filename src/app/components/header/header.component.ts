@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular
 import { NgIf, } from '@angular/common';
 
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { VentaService } from '../../services/venta.service';
+
 
 import { AuthService } from '../../services/auth.service';
 
@@ -12,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  imports: [NgIf, RouterModule, MatIconModule, FormsModule]
+  imports: [NgIf, RouterModule, MatIconModule, FormsModule, MatIconModule]
 })
 export class HeaderComponent implements OnInit {
 
@@ -34,9 +37,11 @@ export class HeaderComponent implements OnInit {
 
   searchQuery: string = '';
 
+  mostrarInicio = false;
+
   @Output() userLoggedOut = new EventEmitter<void>();
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, public router: Router, private ventaService: VentaService) {
     this.authService.userNombre$.subscribe(nombre => {
       this.userNombre = nombre;
     });
@@ -51,6 +56,7 @@ export class HeaderComponent implements OnInit {
         this.menuOpen = false; // 🔹 Cierra el menú inmediatamente si edit-profile está abierto
       }
     });
+
   }
 
   ngOnInit(): void {
@@ -70,7 +76,38 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    this.actualizarVisibilidadInicio();
+
+    // Re-evaluar visibilidad cada vez que cambie la ruta
+    this.router.events.subscribe(() => {
+      this.actualizarVisibilidadInicio();
+    });
   }
+
+    actualizarVisibilidadInicio() {
+    const rutaActual = this.router.url;
+
+    // Ocultar si estamos en '/home'
+    if (rutaActual === '/home') {
+      this.mostrarInicio = false;
+      return;
+    }
+
+    // Ocultar si hay ventas pausadas
+    /* if (this.ventaService.existenVentasPausadas()) {
+      this.mostrarInicio = false;
+      return;
+    } */
+
+    // Mostrar si está autenticado y no hay restricciones
+    this.mostrarInicio = this.authService.isLoggedIn;
+  }
+
+
+  irAInicio() {
+    this.router.navigate(['/home']);
+  }
+
 
   toggleMenu() {
     if (!this.isEditProfileVisible) {

@@ -106,26 +106,49 @@ button {
   color: white;
 }
 
+
+/* Botones chicos */
+.btn-verde-chico,
+.btn-amarillo-chico,
+.btn-gris-chico,
+.btn-rojo-chico {
+  font-size: small;
+  font-weight: 400;
+  padding: 3px;
+  border-radius: 6px;
+}
+
+.btn-icon-chico{
+    width: 1.7rem;
+    margin-right: 5px;
+}
+
 /* 📌 Botón Amarillo (Advertencias, Pausar) */
-.btn-amarillo {
+.btn-amarillo 
+.btn-amarillo-chico {
   background: linear-gradient(45deg, #fcd25f, #f6a80c);
   color: black;
 }
 
-.btn-amarillo:hover {
+.btn-amarillo:hover 
+.btn-amarillo-chico:hover {
   background: linear-gradient(45deg, #f6a80c, #fcd25f);
   box-shadow: 0 4px 8px rgba(255, 204, 0, 0.5);
   color: whitesmoke;
 }
 
 .btn-amarillo:disabled,
-.btn-amarillo[disabled] {
+.btn-amarillo[disabled] 
+.btn-amarillo-chico:disabled,
+.btn-amarillo-chico[disabled] {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .btn-amarillo:disabled:hover,
-.btn-amarillo[disabled]:hover {
+.btn-amarillo[disabled]:hover
+.btn-amarillo-chico:disabled:hover,
+.btn-amarillo-chico[disabled]:hover {
   background: linear-gradient(45deg, #fcd25f, #f6a80c);
   box-shadow: none;
   color: black;
@@ -163,25 +186,11 @@ button {
   box-shadow: none;
 }
 
-.btn-verde-chico {
-  font-size: small;
-  font-weight: 500;
-  padding: 3px;
-  border-radius: 6px;
-}
-
 /* 📌 Botón Gris (Opciones Neutrales) ya es azul*/
 .btn-gris,
 .btn-gris-chico {
   background: linear-gradient(45deg, #56545f, #3f58fb);
   color: white;
-}
-
-.btn-gris-chico {
-  font-size: small;
-  font-weight: 500;
-  padding: 3px;
-  border-radius: 6px;
 }
 
 .btn-gris:hover,
@@ -237,13 +246,6 @@ button {
   background: linear-gradient(45deg, darkred, gray);
   color: white;
   box-shadow: none;
-}
-
-.btn-rojo-chico {
-  font-size: small;
-  font-weight: 500;
-  padding: 3px;
-  border-radius: 6px;
 }
 
 /* 📌 Botón Rojo tache (limpiar campos) */
@@ -354,8 +356,9 @@ button {
   color: red;
 }
 
-/* ---------- Estilos impresión tickets ---------- */
 
+
+/* ---------- Estilos impresión tickets ---------- */
 .total-pagar {
   font-size: 15px;
 }
