@@ -100,25 +100,6 @@
   vertical-align: middle;
 }
 
-/* 🔹 Botón de cerrar sesión */
-.logout-button {
-  background-color: rgb(14, 136, 206);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-.login-button {
-  background-color: rgb(14, 136, 206);
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
 /* Contenedor del menú */
 .relative {
   position: relative;
@@ -197,3 +178,25 @@
   margin-right: 5px;
 }
 
+.icon-button {
+  color: yellowgreen;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+}
+
+.icon-button:hover {
+  background: linear-gradient(45deg, rgb(255, 0, 0), rgb(236, 230, 230));
+  color: yellow;
+}
+
+
+@media (max-width: 768px) {
+  .user-info {
+    display: none;
+  }
+}

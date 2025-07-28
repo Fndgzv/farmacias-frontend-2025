@@ -58,7 +58,8 @@ export class AjustesInventarioFarmaciaComponent implements OnInit {
       nombre: [''],
       codigoBarras: [''],
       categoria: [''],
-      inapam: ['']
+      inapam: [''],
+      generico: ['']
     });
 
     this.cargarFarmacias();

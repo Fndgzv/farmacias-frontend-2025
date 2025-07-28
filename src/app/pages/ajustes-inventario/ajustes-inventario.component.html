@@ -4,9 +4,7 @@
     </div>
 
     <!-- Filtros -->
-    <div class="row mb-2">
-        <div class="col-md-1"></div>
-        <div class="col-md-1 subtitulo">Filtros:</div>
+    <div class="row mb-2 filtros-container">
         <div class="col-md-3">
             <label>Nombre</label>
             <div class="position-relative">
@@ -54,6 +52,21 @@
                 <button *ngIf="filtros.descuentoINAPAM !== null" type="button"
                         class="btn btn-sm btn-light position-absolute top-50 end-0 translate-middle-y btn-rojo-chico"
                         (click)="limpiarFiltro('descuentoINAPAM')">
+                        <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <label>Genérico?</label>
+            <div class="position-relative">
+                <select [(ngModel)]="filtros.generico" name="generico" class="form-control pr-4">
+                    <option [ngValue]="null">--</option>
+                    <option [ngValue]="true">Sí</option>
+                    <option [ngValue]="false">No</option>
+                </select>
+                <button *ngIf="filtros.generico !== null" type="button"
+                        class="btn btn-sm btn-light position-absolute top-50 end-0 translate-middle-y btn-rojo-chico"
+                        (click)="limpiarFiltro('generico')">
                         <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
             </div>
@@ -185,7 +198,8 @@
         <!-- Botones -->
         <div class="container-masivos">
             <button class="btn-rojo-chico" style="margin-left: 4rem;" type="button"
-                (click)="limpiarCamposCambioMasivo()">Cancelar</button>
+                (click)="limpiarCamposCambioMasivo()">Cancelar
+            </button>
             <button class="btn-verde-chico" style="margin-right: 4rem;" type="button"
                 [disabled]="!cambiosMasivosValidos" (click)="aplicarCambiosMasivos()">
                 Aplicar Cambios
@@ -202,30 +216,31 @@
                 <th (click)="ordenar('nombre')">
                     Nombre
                     <i [ngClass]="{
-          'bi': true,
-          'bi-caret-up-fill': columnaOrden === 'nombre' && direccionOrden === 'asc',
-          'bi-caret-down-fill': columnaOrden === 'nombre' && direccionOrden === 'desc',
-          'bi-caret-up': columnaOrden !== 'nombre'
-        }" class="icono-orden"></i>
+                        'bi': true,
+                        'bi-caret-up-fill': columnaOrden === 'nombre' && direccionOrden === 'asc',
+                        'bi-caret-down-fill': columnaOrden === 'nombre' && direccionOrden === 'desc',
+                        'bi-caret-up': columnaOrden !== 'nombre'
+                    }" class="icono-orden"></i>
                 </th>
                 <th (click)="ordenar('codigoBarras')">
                     Código Barras
                     <i [ngClass]="{
-          'bi': true,
-          'bi-caret-up-fill': columnaOrden === 'codigoBarras' && direccionOrden === 'asc',
-          'bi-caret-down-fill': columnaOrden === 'codigoBarras' && direccionOrden === 'desc',
-          'bi-caret-up': columnaOrden !== 'codigoBarras'
-        }" class="icono-orden"></i>
+                        'bi': true,
+                        'bi-caret-up-fill': columnaOrden === 'codigoBarras' && direccionOrden === 'asc',
+                        'bi-caret-down-fill': columnaOrden === 'codigoBarras' && direccionOrden === 'desc',
+                        'bi-caret-up': columnaOrden !== 'codigoBarras'
+                    }" class="icono-orden"></i>
                 </th>
                 <th (click)="ordenar('categoria')">
                     Categoría
                     <i [ngClass]="{
-          'bi': true,
-          'bi-caret-up-fill': columnaOrden === 'categoria' && direccionOrden === 'asc',
-          'bi-caret-down-fill': columnaOrden === 'categoria' && direccionOrden === 'desc',
-          'bi-caret-up': columnaOrden !== 'categoria'
-        }" class="icono-orden"></i>
+                        'bi': true,
+                        'bi-caret-up-fill': columnaOrden === 'categoria' && direccionOrden === 'asc',
+                        'bi-caret-down-fill': columnaOrden === 'categoria' && direccionOrden === 'desc',
+                        'bi-caret-up': columnaOrden !== 'categoria'
+                    }" class="icono-orden"></i>
                 </th>
+                <th>Genérico</th>
                 <th>Stock Mín.</th>
                 <th>Stock Máx.</th>
                 <th>INAPAM</th>
@@ -240,6 +255,9 @@
                 <td>{{ p.nombre }}</td>
                 <td>{{ p.codigoBarras }}</td>
                 <td>{{ p.categoria }}</td>
+                <td style="text-align: center;">
+                    <input type="checkbox" [checked]="p.generico" disabled>
+                </td>
                 <td>{{ p.stockMinimo }}</td>
                 <td>{{ p.stockMaximo }}</td>
                 <td style="text-align: center;">
@@ -248,7 +266,7 @@
                 <td>{{ p.costo | currency }}</td>
                 <td>{{ p.precio |currency }}</td>
                 <td>
-                    <button class="btn btn-gris-chico" (click)="editarProducto(p)">
+                    <button class="btn-icon-chico btn-gris-chico" (click)="editarProducto(p)">
                         <fa-icon [icon]="'pen'"></fa-icon>
                     </button>
                 </td>

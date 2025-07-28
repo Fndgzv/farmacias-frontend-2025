@@ -2,7 +2,7 @@
   padding: 5px;
 }
 
-.filtros {
+.filtros-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -74,8 +74,3 @@
 .btn-grabar {
   text-align: center;
 } 
-
-.btn{
-    width: 1.7rem;
-    margin-right: 5px;
-}

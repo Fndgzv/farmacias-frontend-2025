@@ -27,19 +27,6 @@
       <li [routerLink]="'/usuarios'" routerLinkActive="active">Usuarios <fa-icon [icon]="'user'"
           class="menu-icon"></fa-icon></li>
       <li>Clientes <fa-icon [icon]="'users'" class="menu-icon"></fa-icon></li>
-      <li>Productos <fa-icon [icon]="'truck'" class="menu-icon"></fa-icon></li>
-      <li [routerLink]="'/proveedores'" routerLinkActive="active">Proveedores
-        <fa-icon [icon]="'truck'" class="menu-icon"></fa-icon>
-      </li>
-    </ul>
-
-    <!-- Movimientos -->
-    <li class="menu-title">
-      <span (click)="toggleMenu('movements')">
-        Movimientos {{ expandedMenu === 'movements' ? '▲' : '▶' }}
-      </span>
-    </li>
-    <ul *ngIf="expandedMenu === 'movements'" class="submenu">
       <li *ngIf="userRol === 'admin'" class="has-submenu">
         <span (click)="toggleSubMenu('almacen')">
           Almacén <fa-icon [icon]="'warehouse'" class="menu-icon"></fa-icon>
@@ -57,6 +44,24 @@
           </li>
         </ul>
       </li>
+
+      <li [routerLink]="'/proveedores'" routerLinkActive="active">Proveedores
+        <fa-icon [icon]="'truck'" class="menu-icon"></fa-icon>
+      </li>
+
+      <li [routerLink]="'/cortes-de-caja'" routerLinkActive="active">Cortes de caja
+        <fa-icon [icon]="'file-signature'" class="menu-icon"></fa-icon>
+      </li>
+      
+    </ul>
+
+    <!-- Movimientos -->
+    <li class="menu-title">
+      <span (click)="toggleMenu('movements')">
+        Movimientos {{ expandedMenu === 'movements' ? '▲' : '▶' }}
+      </span>
+    </li>
+    <ul *ngIf="expandedMenu === 'movements'" class="submenu">
 
       <li *ngIf="userRol === 'admin' || userRol === 'empleado'" [routerLink]="'/ventas'" routerLinkActive="active">
         Ventas <fa-icon [icon]="'cash-register'" class="menu-icon"></fa-icon>
