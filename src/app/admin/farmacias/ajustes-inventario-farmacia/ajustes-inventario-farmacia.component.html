@@ -178,14 +178,14 @@
                         <div class="d-flex justify-content-center">
                             <!-- Botón Editar -->
                             <button class="btn-icon-chico btn-gris-chico" [disabled]="estadoEdicion[i._id]"
-                                (click)="habilitarEdicion(i._id)">
+                                (click)="habilitarEdicion(i._id)" matTooltip="Editar renglón">
                                 <fa-icon [icon]="faEdit"></fa-icon>
                             </button>
 
                             <!-- Botón Guardar -->
                             <button class="btn-icon-chico btn-verde-chico"
                                 [disabled]="estadoGuardado[i._id] === 'guardando' || !estadoEdicion[i._id]"
-                                (click)="guardarFila(i)">
+                                (click)="guardarFila(i)" matTooltip="Guardar">
                                 <fa-icon *ngIf="estadoGuardado[i._id] === 'guardando'" [icon]="faSpinner"
                                     class="fa-spin"></fa-icon>
                                 <fa-icon *ngIf="estadoGuardado[i._id] === 'exito'" [icon]="faCheck"></fa-icon>
@@ -196,7 +196,7 @@
                             <!-- Botón Cancelar -->
                             <button class="btn-icon-chico btn-rojo-chico"
                                 [disabled]="estadoGuardado[i._id] === 'guardando' || !estadoEdicion[i._id]"
-                                (click)="cancelarEdicion(i)">
+                                (click)="cancelarEdicion(i)" matTooltip="Cancelar">
                                 <fa-icon [icon]="faTimes"></fa-icon>
                             </button>
                         </div>

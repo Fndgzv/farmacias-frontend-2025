@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService, Usuario } from '../../services/usuario.service';
 import { FarmaciaService, Farmacia } from '../../services/farmacia.service';
@@ -12,7 +13,8 @@ import { faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 declare const bootstrap: any;
 @Component({
   selector: 'app-usuarios',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, FontAwesomeModule], templateUrl: './usuarios.component.html',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, FontAwesomeModule, MatTooltipModule],
+  templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent implements OnInit {

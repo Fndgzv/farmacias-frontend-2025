@@ -15,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  imports: [NgIf, RouterModule, MatIconModule, FormsModule, MatIconModule]
+  imports: [NgIf, RouterModule, MatIconModule, FormsModule, MatIconModule, MatTooltipModule]
 })
 export class HeaderComponent implements OnInit {
 

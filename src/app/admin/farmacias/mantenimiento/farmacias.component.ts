@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
 import { FarmaciaService, Farmacia } from '../../../services/farmacia.service';
 
@@ -13,7 +14,7 @@ declare const bootstrap: any;
 
 @Component({
   selector: 'app-farmacias',
-  imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, FormsModule, MatTooltipModule],
   templateUrl: './farmacias.component.html',
   styleUrl: './farmacias.component.css'
 })
