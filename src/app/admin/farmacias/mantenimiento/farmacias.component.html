@@ -21,10 +21,10 @@
                 <td>{{ f.telefono }}</td>
                 <td>{{ f.firma }}</td>
                 <td>
-                    <button class="btn-icon-chico btn-gris-chico" (click)="editar(f)">
+                    <button class="btn-icon-chico btn-gris-chico" (click)="editar(f)" matTooltip="Editar">
                         <fa-icon [icon]="'pen'"></fa-icon>
                     </button>
-                    <button class="btn-icon-chico btn-rojo-chico" (click)="eliminar(f._id!)">
+                    <button class="btn-icon-chico btn-rojo-chico" (click)="eliminar(f._id!)" matTooltip="Eliminar">
                         <fa-icon [icon]="'trash'"></fa-icon>
                     </button>
                 </td>

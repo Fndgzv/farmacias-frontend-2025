@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { InventarioFarmaciaService } from '../../../services/inventario-farmacia.service';
 import { FarmaciaService } from '../../../services/farmacia.service';
 import Swal from 'sweetalert2';
@@ -16,7 +17,8 @@ import { faSpinner, faCheck, faSave, faPen, faTimes } from '@fortawesome/free-so
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FaIconComponent
+    FaIconComponent,
+    MatTooltipModule
   ],
   templateUrl: './ajustes-inventario-farmacia.component.html',
   styleUrl: './ajustes-inventario-farmacia.component.css'
